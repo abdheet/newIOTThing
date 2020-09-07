@@ -1,0 +1,175 @@
+<div class="jumbotron grad text-center">
+  <h1 class="display-5">
+    Create a new Application
+  </h1>
+</div>
+
+<div class=" container">
+  <div class="row custom-wrapper">
+    <div class="leftside col-md-6">
+
+     
+      <form [formGroup]="registrationForm">
+        <div class="group-gap">
+          <div class="d-block my-3">
+
+
+            <div class="mb-3">
+
+
+
+              <!-- <select class="custom-select" (change)="changeSensor($event)" formControlName="SensorName">
+                <option value="" selected>Choose your Sensor</option>
+                <option *ngFor="let sensor of Sensors" [ngValue]="sensor">{{sensor}}</option>
+              
+              </select> -->
+
+
+              <select class="form-control" formControlName="SensorName">
+                <option class="dropdown-menu" value="Any" selected >Choose your Sensor</option>
+                <option class="dropdown-item" value="PressureSensor">Pressure Sensor</option>
+                <option class="dropdown-item" value="tempsensor">Temperature Sensor</option>
+                <option class="dropdown-item" value="OpticalSensor">Optical Sensor</option>
+                <option class="dropdown-item" value="heightsensor">Height Sensor</option>
+                <option class="dropdown-item" value="gpssensor">GPS Sensor</option>
+              </select>
+              <div *ngIf="SensorName.value != 'Any' && SensorName.value != ''">
+
+
+                <select style="margin-top: 2%;" class="custom-select" formControlName="SensorType">
+                  <option value="1">Range</option>
+                  <option value="2">Boolean</option>
+                </select>
+              </div>
+
+
+              <div style="margin-top: 2%;" *ngFor="let slider of sliders">
+                <div *ngIf="SensorType.value== '1'">
+
+
+                  <div *ngIf="SensorName.value == slider.start">
+
+
+                    <ng5-slider [(value)]="slider.value" [(highValue)]="slider.highValue"
+                      [options]="sliderOptions(slider)" formControlName="Threshold"></ng5-slider>
+                  </div>
+                </div>
+
+               
+              </div>
+              <div *ngIf="SensorType.value == '2'">
+
+                <select style="margin-top: 2%;" class="custom-select" formControlName="SensorBoolean">
+                  <option ngValue=true selected>True</option>
+                  <option ngValue=false>False</option>
+                </select>
+        
+              </div>
+              <!-- <div *ngIf="SensorType.value == '2'">
+
+                <select class="custom-select" formControlName="SensorBoolean">
+                  <option value="True" selected>True</option>
+                  <option value="False">False</option>
+                </select>
+
+              </div> -->
+
+
+
+
+              <!-- <div *ngIf = "SensorName.value == '1' " id="sliderrange"> -->
+              <!-- <p>Low value: {{ registrationForm.value.sliderControl[0] }}</p>
+                <p>High value: {{ registrationForm.value.sliderControl[1] }}</p> -->
+
+              <!-- <ng5-slider  [options]="options" id="sliderControl" formControlName="sliderControl"></ng5-slider>
+              </div> -->
+
+              <!-- <div *ngIf = "SensorName.value == '4' " > -->
+              <!-- <p>Low value: {{ registrationForm.value.sliderControl[0] }}</p>
+                <p>High value: {{ registrationForm.value.sliderControl[1] }}</p> -->
+
+              <!-- <ng5-slider  [options]="options1" id="sliderControl1" formControlName="sliderControl1"></ng5-slider>
+              </div> -->
+
+
+              <!-- <select class="custom-select" name="Thresold" id="Thresold" formControlName="Thresold">
+                <option value="" disabled selected>Choose Thresold value</option>
+              </select> -->
+
+
+              <!-- 
+              <div class="invalid-feedback" *ngIf="isSubmitted && Thresold.errors?.required">
+                <sup>*</sup>Please enter your Thresold value
+              </div> -->
+              <!-- <p><button (click)="resetForm()">Reset</button></p> -->
+             
+
+
+            </div>
+
+          </div>
+        </div>
+
+
+      </form>
+      <div class="text-center">
+        <button class="btn btn-primary mb-2"  [disabled]="!SensorType.valid" (click)="onAddbutton()">Add</button>
+      </div>
+     
+     
+
+    
+
+      <!-- <button class="btn btn-danger btn-lg btn-block" data-toggle="modal" data-target="#exampleModal">
+      Submit</button>
+    </div> -->
+
+    </div>
+    <div class="col-md-2">
+
+    </div>
+    <div class="rightside col-md-4">
+      <form [formGroup]="ThingNameForm">
+
+        <input style="margin-top: 3%;" class="form-control" placeholder="ApplicationName" id="Thingname" formControlName="ThingName">
+
+
+
+      </form>
+      <!-- <div *ngIf="SensorType.value== '1'"> -->
+        <ul *ngFor="let data of dataArray" [ngValue]="data">{{data.SensorName}}
+          <li> <sub>{{data.Threshold}}</sub>
+          </li>
+        </ul>
+      <!-- </div> -->
+     
+
+      <!-- <div *ngIf="SensorType.value== '2'"> -->
+        <ul *ngFor="let dataNew of booleanArray" [ngValue]="dataNew">{{dataNew.SensorName}}
+          <li> <sub>{{dataNew.SensorBoolean}}</sub>
+          </li>
+        </ul>
+      <!-- </div> -->
+
+      <button type="submit" style="margin-top: 2%;" class="btn btn-danger btn-lg btn-block" [disabled]="!ThingName.valid" (click)="onSubmit()">
+        Submit</button>
+
+
+    </div>
+
+
+  </div>
+
+
+
+  <!-- 
+<div class='sliderwrap'>
+  <label class="labeltext">MinRange Slider With Limits</label>
+  <ejs-slider id='minrange' #minrange [value]='minValue' [min]='min' [max]='max' [tooltip]='tooltip' [ticks]='ticks' [type]='minType'
+      [limits]='minRangeLimits'></ejs-slider>
+</div> -->
+  <!-- <div class='sliderwrap'>
+  <ejs-slider id='range' #range [value]='rangeValue' [min]='min' [max]='max' [tooltip]='tooltip' [ticks]='ticks'
+    [type]='rangetype' [limits]='rangeLimits'></ejs-slider>
+</div> -->
+
